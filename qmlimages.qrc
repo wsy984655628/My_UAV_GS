@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>FlightMap/crossHair.svg</file>
+        <file>FlightMap/rollDialWhite.svg</file>
+        <file>FlightMap/rollPointerWhite.svg</file>
+    </qresource>
+</RCC>
