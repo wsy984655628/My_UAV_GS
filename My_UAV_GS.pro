@@ -14,9 +14,11 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    quickview.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    quickview.h
 
 FORMS    += mainwindow.ui
 

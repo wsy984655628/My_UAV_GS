@@ -106,9 +106,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     groupLayout->addWidget(ui->horizontalScrollBar);
     ui->groupBox->setLayout(groupLayout);
-    
-
-
 }
 
 MainWindow::~MainWindow()
