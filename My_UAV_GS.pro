@@ -15,12 +15,18 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    quickview.cpp
+    quickviewitem.cpp \
+    uasquickview.cpp \
+    quickviewtextitem.cpp
 
 HEADERS  += mainwindow.h \
-    quickview.h
+    uasinterface.h \
+    quickviewitem.h \
+    uasquickview.h \
+    quickviewtextitem.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    uasquickview.ui
 
 RESOURCES += \
     qml.qrc \

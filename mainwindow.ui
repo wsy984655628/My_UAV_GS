@@ -20,13 +20,19 @@
       <property name="title">
        <string>GroupBox</string>
       </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QScrollBar" name="horizontalScrollBar">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
+      <widget class="QScrollBar" name="horizontalScrollBar">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>100</y>
+         <width>52</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
      </widget>
     </item>
     <item>
