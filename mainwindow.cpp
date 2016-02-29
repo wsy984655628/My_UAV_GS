@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "uasquickview.h"
+#include "uastabbedinfoview.h"
+
 #include <QQmlAspectEngine>
 #include <QRenderAspect>
 #include <QInputAspect>
@@ -105,8 +107,9 @@ MainWindow::MainWindow(QWidget *parent) :
     mainLayout->addLayout(LeftLayout);
     mainLayout->addWidget(ui->webView);
 
-    QWidget* widget = new UASQuickView(this);
-    groupLayout->addWidget(widget);
+    QWidget* UAS_QuickView = new UASQuickView(this);
+//    QWidget* UAS_InfoView = new UASTabbedInfoView(this);
+    groupLayout->addWidget(UAS_QuickView);
     groupLayout->addWidget(ui->horizontalScrollBar);
     ui->groupBox->setLayout(groupLayout);
 

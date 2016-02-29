@@ -17,16 +17,21 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     quickviewitem.cpp \
     uasquickview.cpp \
-    quickviewtextitem.cpp
+    quickviewtextitem.cpp \
+    uasdockwidget.cpp \
+    uastabbedinfoview.cpp
 
 HEADERS  += mainwindow.h \
     uasinterface.h \
     quickviewitem.h \
     uasquickview.h \
-    quickviewtextitem.h
+    quickviewtextitem.h \
+    uasdockwidget.h \
+    uastabbedinfoview.h
 
 FORMS    += mainwindow.ui \
-    uasquickview.ui
+    uasquickview.ui \
+    uastabbedinfoview.ui
 
 RESOURCES += \
     qml.qrc \
