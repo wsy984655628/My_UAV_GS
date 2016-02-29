@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "uasquickview.h"
 #include "uastabbedinfoview.h"
+#include "uastabbedmenuview.h"
 
 #include <QQmlAspectEngine>
 #include <QRenderAspect>
@@ -91,28 +92,24 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QUrl url("qrc:/map/map.html");
     ui->webView->setUrl(url);
-//    QGridLayout* mainLayout = qobject_cast<QGridLayout*>( ui->centralwidget->layout( ) );
-//    mainLayout->addWidget(indicator_container,0,1);
-//    mainLayout->addWidget(view3D_container,0,0);
-//    mainLayout->addWidget(ui->webView,0,2);
+
     QHBoxLayout* mainLayout = qobject_cast<QHBoxLayout*>( ui->centralwidget->layout( ) );
     QVBoxLayout* LeftLayout = new QVBoxLayout;
     QHBoxLayout* ViewLayout = new QHBoxLayout;
-    QGridLayout* groupLayout = new QGridLayout;
+
+//    QWidget* UAS_InfoView = new UASTabbedInfoView(this);
+//    QWidget* UAS_InfoView = new UASQuickView(this);
+
+    QWidget* test = new UASTabbedMenuView(this);
 
     ViewLayout->addWidget(view3D_container);
     ViewLayout->addWidget(indicator_container);
     LeftLayout->addLayout(ViewLayout);
-    LeftLayout->addWidget(ui->groupBox);
     mainLayout->addLayout(LeftLayout);
     mainLayout->addWidget(ui->webView);
-
-    QWidget* UAS_QuickView = new UASQuickView(this);
-//    QWidget* UAS_InfoView = new UASTabbedInfoView(this);
-    groupLayout->addWidget(UAS_QuickView);
-    groupLayout->addWidget(ui->horizontalScrollBar);
-    ui->groupBox->setLayout(groupLayout);
-
+//    LeftLayout->addWidget(UAS_InfoView);
+    LeftLayout->addWidget(test);
+    LeftLayout->addWidget(ui->horizontalScrollBar);
 }
 
 MainWindow::~MainWindow()

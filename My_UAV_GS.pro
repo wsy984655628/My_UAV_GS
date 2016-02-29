@@ -18,20 +18,33 @@ SOURCES += main.cpp\
     quickviewitem.cpp \
     uasquickview.cpp \
     quickviewtextitem.cpp \
-    uasdockwidget.cpp \
-    uastabbedinfoview.cpp
+    uastabbedinfoview.cpp \
+    uascompass.cpp \
+    uastabbedmenuview.cpp \
+    uascontral.cpp \
+    uasparameter.cpp \
+    uassimulation.cpp
 
 HEADERS  += mainwindow.h \
     uasinterface.h \
     quickviewitem.h \
     uasquickview.h \
     quickviewtextitem.h \
-    uasdockwidget.h \
-    uastabbedinfoview.h
+    uastabbedinfoview.h \
+    uascompass.h \
+    uastabbedmenuview.h \
+    uascontral.h \
+    uasparameter.h \
+    uassimulation.h
 
 FORMS    += mainwindow.ui \
     uasquickview.ui \
-    uastabbedinfoview.ui
+    uastabbedinfoview.ui \
+    uascompass.ui \
+    uastabbedmenuview.ui \
+    uascontral.ui \
+    uasparameter.ui \
+    uassimulation.ui
 
 RESOURCES += \
     qml.qrc \

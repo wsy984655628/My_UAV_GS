@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>UASTabbedInfoView</class>
- <widget class="QWidget" name="UASTabbedInfoView">
+ <class>UASTabbedMenuView</class>
+ <widget class="QWidget" name="UASTabbedMenuView">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -12,23 +12,27 @@
   </property>
   <property name="font">
    <font>
+    <family>MS Shell Dlg 2</family>
     <pointsize>12</pointsize>
+    <weight>50</weight>
+    <italic>false</italic>
+    <bold>false</bold>
    </font>
   </property>
   <property name="windowTitle">
    <string>Form</string>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
   </property>
   <widget class="QTabWidget" name="tabWidget">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>610</width>
+     <width>615</width>
      <height>400</height>
     </rect>
-   </property>
-   <property name="mouseTracking">
-    <bool>true</bool>
    </property>
    <property name="currentIndex">
     <number>-1</number>

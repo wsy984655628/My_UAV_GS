@@ -2,6 +2,8 @@
 #include "quickviewtextitem.h"
 #include "ui_uasquickview.h"
 
+#include <QGroupBox>
+
 UASQuickView::UASQuickView(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::UASQuickView)
@@ -12,7 +14,13 @@ UASQuickView::UASQuickView(QWidget *parent) :
 
     ui->horizontalLayout->setMargin(0);
     m_verticalLayoutList.append(new QVBoxLayout());
-    ui->horizontalLayout->addItem(m_verticalLayoutList[0]);
+    ui->horizontalLayout->addLayout(m_verticalLayoutList[0]);
+
+    QGroupBox* group = new QGroupBox(this);
+    QGridLayout* grid = new QGridLayout(this);
+
+    group->setLayout(ui->horizontalLayout);
+    grid->addWidget(group,0,0);
 
     if (uasPropertyValueMap.size() == 0)
     {
@@ -20,6 +28,7 @@ UASQuickView::UASQuickView(QWidget *parent) :
         valueEnabled("altitudeAMSLFT");
         valueEnabled("altitudeRelative");
         valueEnabled("groundSpeed");
+        valueEnabled("airSpeed");
         valueEnabled("distToWaypoint");
     }
     updateTimer = new QTimer(this);
@@ -75,7 +84,7 @@ void UASQuickView::sortItems(int columncount)
     for (int i = 0; i < columncount; i++ )
     {
         QVBoxLayout * layout = new QVBoxLayout();
-        ui->horizontalLayout->addItem(layout);
+        ui->horizontalLayout->addLayout(layout);
         m_verticalLayoutList.append(layout);
         layout->setMargin(0);
     }
@@ -105,6 +114,6 @@ void UASQuickView::updateTimerTick()
     }
     for (QMap<QString,QuickViewItem*>::const_iterator i = uasPropertyToLabelMap.constBegin();i!=uasPropertyToLabelMap.constEnd();i++)
     {
-        i.value()->setValuePixelSize(25);
+        i.value()->setValuePixelSize(30);
     }
 }

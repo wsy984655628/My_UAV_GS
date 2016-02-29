@@ -1,14 +1,17 @@
 #include "uastabbedinfoview.h"
 #include "ui_uastabbedinfoview.h"
 
-UASTabbedInfoView::UASTabbedInfoView(const QString& title,QAction* action ,QWidget *parent)
-    : UASDockWidget(title, action, parent),
+UASTabbedInfoView::UASTabbedInfoView(QWidget *parent)
+    :QWidget(parent),
         ui(new Ui::UASTabbedInfoView)
 {
     ui->setupUi(this);
     quickView = new UASQuickView(this);
+    compass = new UASCompass(this);
+
+
     ui->tabWidget->addTab(quickView,"Quick");
-    loadSettings();
+    ui->tabWidget->addTab(compass,"Compass");
 }
 
 UASTabbedInfoView::~UASTabbedInfoView()

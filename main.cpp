@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
 //    w.setFixedSize(1200,600);
     w.show();
 
-    UASQuickView u;
+//    UASQuickView u;
 //    u.show();
 
 
