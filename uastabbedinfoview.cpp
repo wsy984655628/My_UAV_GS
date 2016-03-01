@@ -1,5 +1,6 @@
 #include "uastabbedinfoview.h"
 #include "ui_uastabbedinfoview.h"
+#include "mainwindow.h"
 
 UASTabbedInfoView::UASTabbedInfoView(QWidget *parent)
     :QWidget(parent),

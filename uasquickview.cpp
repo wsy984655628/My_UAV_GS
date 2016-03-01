@@ -1,6 +1,7 @@
 #include "uasquickview.h"
 #include "quickviewtextitem.h"
 #include "ui_uasquickview.h"
+#include "mainwindow.h"
 
 #include <QGroupBox>
 
@@ -24,14 +25,15 @@ UASQuickView::UASQuickView(QWidget *parent) :
 
     if (uasPropertyValueMap.size() == 0)
     {
-        valueEnabled("altitudeAMSL");
-        valueEnabled("altitudeAMSLFT");
-        valueEnabled("altitudeRelative");
-        valueEnabled("groundSpeed");
-        valueEnabled("airSpeed");
+        valueEnabled("Roll");
+        valueEnabled("Pitch");
+        valueEnabled("Yaw");
+        valueEnabled("Height");
         valueEnabled("distToWaypoint");
+        valueEnabled("groundSpeed");
     }
     updateTimer = new QTimer(this);
+
     connect(updateTimer, &QTimer::timeout, this, &UASQuickView::updateTimerTick);
     updateTimer->start(1000);
 }
@@ -116,4 +118,11 @@ void UASQuickView::updateTimerTick()
     {
         i.value()->setValuePixelSize(30);
     }
+}
+
+void UASQuickView::valueChanged(const QString &name, const QVariant &variant)
+{
+    double value = variant.toDouble();
+    uasPropertyValueMap[name] = value;
+
 }

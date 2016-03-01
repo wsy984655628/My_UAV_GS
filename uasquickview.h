@@ -42,7 +42,7 @@ protected:
 //    void resizeEvent(QResizeEvent *evt);
 
 public slots:
-//    void valueChanged(const int uasid, const QString& name, const QString& unit, const QVariant& value,const quint64 msecs);
+    void valueChanged(const QString& name, const QVariant& variant);
 //    void actionTriggered(bool checked);
 //    void actionTriggered();
     void updateTimerTick();

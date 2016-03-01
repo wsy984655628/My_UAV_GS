@@ -40,18 +40,18 @@ Entity
 
             Rotate{
                 axis:Qt.vector3d(1,0,0)
-                //angle:0
+//                angle:0
                 angle:_settings.Pitch
             }
             Rotate{
                 axis: Qt.vector3d(0,0,1)
-                //angle:0
-                angle:_settings.Pitch
+//                angle:0
+                angle:_settings.Roll
             }
             Rotate{
                 axis:Qt.vector3d(0,1,0)
-                angle:_settings.Pitch
-                //angle:0
+                angle:_settings.Yaw
+//                angle:0
             }
         }
 

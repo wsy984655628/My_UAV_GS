@@ -8,8 +8,8 @@ Item{
     property real _defaultPitch: 0
     property real _defaultHeading: 0
 
-    property real _roll: _defaultRoll
-    property real _pitch: _defaultPitch
+    property real _roll: -_settings.Roll
+    property real _pitch: _settings.Pitch
     property real _heading: _defaultHeading
 
     property real indwidth: 230
@@ -35,10 +35,4 @@ Item{
         rollAngle:  _roll
         pitchAngle: _pitch
     }
-//    Rectangle{
-//        anchors.centerIn: parent
-//        width:100
-//        height: 100
-//        color: "black"
-//    }
 }
