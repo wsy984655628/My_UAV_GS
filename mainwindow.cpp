@@ -68,11 +68,12 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+
     ui->setupUi(this);
+    this->resize(1000,600);
 
     SerialSettingDialog::instance();
     connect(ui->actionConfigure_SerialPort, SIGNAL(triggered(bool)), SerialSettingDialog::instance(), SLOT(show()));
-//    connect(ui->actionConfigure_SerialPort, SIGNAL(triggered(bool)), serial, SLOT(show()));
 
     using namespace Qt3D;
     using namespace Qt3D::Quick;
@@ -100,9 +101,11 @@ MainWindow::MainWindow(QWidget *parent) :
     indicator->setSource(QUrl("qrc:/qml/FlightDisplayView.qml"));
 
     QWidget *indicator_container = QWidget::createWindowContainer(indicator);
-    indicator_container->setFixedSize(300,300);
+//    indicator_container->setFixedSize(300,300);
+//    indicator_container->setMinimumWidth(100);
     QWidget *view3D_container = QWidget::createWindowContainer(view3D);
-    view3D_container->setFixedSize(300,300);
+//    view3D_container->setFixedSize(300,300);
+//    view3D_container->setMinimumWidth(100);
 
     QUrl url("qrc:/map/map.html");
     ui->webView->setUrl(url);
@@ -118,14 +121,16 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ViewLayout->addWidget(view3D_container);
     ViewLayout->addWidget(indicator_container);
-    LeftLayout->addLayout(ViewLayout);
-    mainLayout->addLayout(LeftLayout);
-    mainLayout->addWidget(ui->webView);
+
+    LeftLayout->addLayout(ViewLayout,2);
 //    LeftLayout->addWidget(UAS_InfoView);
-    LeftLayout->addWidget(UAS_MenuView);
+    LeftLayout->addWidget(UAS_MenuView,3);
     LeftLayout->addWidget(ui->pitchScrollBar);
     LeftLayout->addWidget(ui->rollScrollBar);
     LeftLayout->addWidget(ui->yawScrollBar);
+
+    mainLayout->addLayout(LeftLayout,1);
+    mainLayout->addWidget(ui->webView,2);
 
     connect(m_settings,SIGNAL(PitchChanged(QString,float)),UAS_MenuView,SLOT(ReceivevalueChanged(QString,float)));
     connect(m_settings,SIGNAL(RollChanged(QString,float)),UAS_MenuView,SLOT(ReceivevalueChanged(QString,float)));
