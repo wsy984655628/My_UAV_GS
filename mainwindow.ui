@@ -14,45 +14,52 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QHBoxLayout" name="horizontalLayout">
+   <layout class="QHBoxLayout" name="MainLayout" stretch="1,2">
     <item>
-     <widget class="QScrollBar" name="rollScrollBar">
-      <property name="minimum">
-       <number>-60</number>
-      </property>
-      <property name="maximum">
-       <number>60</number>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QScrollBar" name="yawScrollBar">
-      <property name="minimum">
-       <number>0</number>
-      </property>
-      <property name="maximum">
-       <number>360</number>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QScrollBar" name="pitchScrollBar">
-      <property name="minimum">
-       <number>-90</number>
-      </property>
-      <property name="maximum">
-       <number>90</number>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
+     <layout class="QVBoxLayout" name="LeftLayout" stretch="3,0,0,0">
+      <item>
+       <layout class="QHBoxLayout" name="viewLayout"/>
+      </item>
+      <item>
+       <widget class="QScrollBar" name="yawScrollBar">
+        <property name="minimum">
+         <number>0</number>
+        </property>
+        <property name="maximum">
+         <number>360</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QScrollBar" name="rollScrollBar">
+        <property name="minimum">
+         <number>-60</number>
+        </property>
+        <property name="maximum">
+         <number>60</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QScrollBar" name="pitchScrollBar">
+        <property name="minimum">
+         <number>-90</number>
+        </property>
+        <property name="maximum">
+         <number>90</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
     <item>
      <widget class="QWebView" name="webView">
@@ -80,7 +87,7 @@
       <x>339</x>
       <y>104</y>
       <width>188</width>
-      <height>100</height>
+      <height>77</height>
      </rect>
     </property>
     <property name="font">

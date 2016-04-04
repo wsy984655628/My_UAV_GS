@@ -18,12 +18,6 @@ UASQuickView::UASQuickView(QWidget *parent) :
     m_verticalLayoutList.append(new QVBoxLayout());
     ui->horizontalLayout->addLayout(m_verticalLayoutList[0]);
 
-    QGroupBox* group = new QGroupBox(this);
-    QGridLayout* grid = new QGridLayout(this);
-
-    group->setLayout(ui->horizontalLayout);
-    grid->addWidget(group,0,0);
-
     if (uasPropertyValueMap.size() == 0)
     {
         valueEnabled("Roll");

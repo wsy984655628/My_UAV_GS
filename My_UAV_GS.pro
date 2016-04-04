@@ -10,9 +10,9 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets serialport
 QT += 3dcore 3drenderer 3dinput 3dquick qml quick
 
 DEFINES += QT_DLL QWT_DLL
-LIBS += -L"C:\Qt\5.5\mingw492_32\lib" -lqwtd
-LIBS += -L"C:\Qt\5.5\mingw492_32\lib" -lqwt
-INCLUDEPATH += C:\Qt\5.5\mingw492_32\include\Qwt
+LIBS += -L"C:\Qt\Qt5.5.1\5.5\mingw492_32\lib" -lqwtd
+LIBS += -L"C:\Qt\Qt5.5.1\5.5\mingw492_32\lib" -lqwt
+INCLUDEPATH += C:\Qt\Qt5.5.1\5.5\mingw492_32\include\Qwt
 
 
 TARGET = My_UAV_GS
@@ -56,7 +56,6 @@ HEADERS  += mainwindow.h \
     my_gs.h \
     comm/gsmavlink.h \
     comm/linkmanager.h \
-    comm/mavlinkdecoder.h \
     comm/mavlinkprotocol.h \
     uas/uas.h \
     uas/uasinterface.h \

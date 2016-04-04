@@ -9,6 +9,8 @@ UASTabbedMenuView::UASTabbedMenuView(QWidget *parent) :
 {
     ui->setupUi(this);
 
+//    this->setSizePolicy(QSizePolicy::Preferred,QSizePolicy::Preferred);
+
     infoview = new UASTabbedInfoView(this);
     contral = new UASContral(this);
     parameter = new UASParameter(this);

@@ -70,7 +70,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
 
     ui->setupUi(this);
-    this->resize(1000,600);
+    this->resize(1000,700);
 
     SerialSettingDialog::instance();
     connect(ui->actionConfigure_SerialPort, SIGNAL(triggered(bool)), SerialSettingDialog::instance(), SLOT(show()));
@@ -101,36 +101,21 @@ MainWindow::MainWindow(QWidget *parent) :
     indicator->setSource(QUrl("qrc:/qml/FlightDisplayView.qml"));
 
     QWidget *indicator_container = QWidget::createWindowContainer(indicator);
-//    indicator_container->setFixedSize(300,300);
-//    indicator_container->setMinimumWidth(100);
+    indicator_container->setMinimumWidth(150);
     QWidget *view3D_container = QWidget::createWindowContainer(view3D);
-//    view3D_container->setFixedSize(300,300);
-//    view3D_container->setMinimumWidth(100);
+    view3D_container->setMinimumWidth(150);
 
     QUrl url("qrc:/map/map.html");
     ui->webView->setUrl(url);
 
-    QHBoxLayout* mainLayout = qobject_cast<QHBoxLayout*>( ui->centralwidget->layout( ) );
-    QVBoxLayout* LeftLayout = new QVBoxLayout;
-    QHBoxLayout* ViewLayout = new QHBoxLayout;
-
-//    QWidget* UAS_InfoView = new UASTabbedInfoView(this);
-//    QWidget* UAS_InfoView = new UASQuickView(this);
-
     QWidget* UAS_MenuView = new UASTabbedMenuView(this);
 
-    ViewLayout->addWidget(view3D_container);
-    ViewLayout->addWidget(indicator_container);
-
-    LeftLayout->addLayout(ViewLayout,2);
-//    LeftLayout->addWidget(UAS_InfoView);
-    LeftLayout->addWidget(UAS_MenuView,3);
-    LeftLayout->addWidget(ui->pitchScrollBar);
-    LeftLayout->addWidget(ui->rollScrollBar);
-    LeftLayout->addWidget(ui->yawScrollBar);
-
-    mainLayout->addLayout(LeftLayout,1);
-    mainLayout->addWidget(ui->webView,2);
+    ui->viewLayout->addWidget(view3D_container);
+    ui->viewLayout->addWidget(indicator_container);
+    ui->LeftLayout->addWidget(UAS_MenuView,5);
+    ui->LeftLayout->addWidget(ui->pitchScrollBar);
+    ui->LeftLayout->addWidget(ui->rollScrollBar);
+    ui->LeftLayout->addWidget(ui->yawScrollBar);
 
     connect(m_settings,SIGNAL(PitchChanged(QString,float)),UAS_MenuView,SLOT(ReceivevalueChanged(QString,float)));
     connect(m_settings,SIGNAL(RollChanged(QString,float)),UAS_MenuView,SLOT(ReceivevalueChanged(QString,float)));

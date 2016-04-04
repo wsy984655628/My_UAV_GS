@@ -11,7 +11,6 @@ UASTabbedInfoView::UASTabbedInfoView(QWidget *parent)
     quickView = new UASQuickView(this);
     meters = new UASMeters(this);
 
-
     ui->tabWidget->addTab(quickView,"Quick");
     ui->tabWidget->addTab(meters,"Meters");
 

@@ -8,11 +8,6 @@ UASMeters::UASMeters(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    QGridLayout *grid = new QGridLayout(this);
-    grid->addWidget(ui->groupBox);
-
-    ui->groupBox->setLayout(ui->gridLayout);
-
     uasPropertyCount = 0;
 
     if(uasPropertyValueMap.size() == 0)

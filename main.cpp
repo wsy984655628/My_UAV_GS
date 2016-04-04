@@ -4,16 +4,14 @@
 #include <QQmlApplicationEngine>
 #include <QQuickView>
 #include "uasquickview.h"
+#include "uasmeters.h"
+#include "uastabbedinfoview.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;
     w.show();
-
-//    UASQuickView u;
-//    u.show();
-
 
     return a.exec();
 }
