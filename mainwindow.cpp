@@ -47,21 +47,21 @@ void Settings::setPitch(float Pitch)
 {
     if(pitch == Pitch) return;
     pitch = Pitch;
-    emit PitchChanged();
+//    emit PitchChanged("Pitch", pitch);
 }
 
 void Settings::setRoll(float Roll)
 {
     if(roll == Roll) return;
     roll = Roll;
-    emit RollChanged();
+//    emit RollChanged("Roll",roll);
 }
 
 void Settings::setYaw(float Yaw)
 {
     if(yaw == Yaw) return;
     yaw = Yaw;
-    emit YawChanged();
+//    emit YawChanged("Yaw",yaw);
 }
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -69,6 +69,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    SerialSettingDialog::instance();
+    connect(ui->actionConfigure_SerialPort, SIGNAL(triggered(bool)), SerialSettingDialog::instance(), SLOT(show()));
+//    connect(ui->actionConfigure_SerialPort, SIGNAL(triggered(bool)), serial, SLOT(show()));
 
     using namespace Qt3D;
     using namespace Qt3D::Quick;
@@ -110,7 +114,7 @@ MainWindow::MainWindow(QWidget *parent) :
 //    QWidget* UAS_InfoView = new UASTabbedInfoView(this);
 //    QWidget* UAS_InfoView = new UASQuickView(this);
 
-    QWidget* test = new UASTabbedMenuView(this);
+    QWidget* UAS_MenuView = new UASTabbedMenuView(this);
 
     ViewLayout->addWidget(view3D_container);
     ViewLayout->addWidget(indicator_container);
@@ -118,10 +122,24 @@ MainWindow::MainWindow(QWidget *parent) :
     mainLayout->addLayout(LeftLayout);
     mainLayout->addWidget(ui->webView);
 //    LeftLayout->addWidget(UAS_InfoView);
-    LeftLayout->addWidget(test);
+    LeftLayout->addWidget(UAS_MenuView);
     LeftLayout->addWidget(ui->pitchScrollBar);
     LeftLayout->addWidget(ui->rollScrollBar);
     LeftLayout->addWidget(ui->yawScrollBar);
+
+    connect(m_settings,SIGNAL(PitchChanged(QString,float)),UAS_MenuView,SLOT(ReceivevalueChanged(QString,float)));
+    connect(m_settings,SIGNAL(RollChanged(QString,float)),UAS_MenuView,SLOT(ReceivevalueChanged(QString,float)));
+    connect(m_settings,SIGNAL(YawChanged(QString,float)),UAS_MenuView,SLOT(ReceivevalueChanged(QString,float)));
+
+    LinkManager::instance();
+    UASManager::instance();
+    connect(UASManager::instance(), SIGNAL(UASCreated(UASInterface*)),
+            this, SLOT(systemCreated(UASInterface*)));
+
+    myTimer = new QTimer(this);
+    myTimer->start(100);
+    connect(myTimer, SIGNAL(timeout()), m_settings, SLOT(attitudeUpdate()));
+
 }
 
 MainWindow::~MainWindow()
@@ -142,4 +160,27 @@ void MainWindow::on_yawScrollBar_sliderMoved(int position)
 void MainWindow::on_pitchScrollBar_sliderMoved(int position)
 {
     m_settings->setPitch(position);
+}
+
+void MainWindow::systemCreated(UASInterface *uas)
+{
+    connect(uas, SIGNAL(attitudeChanged(UASInterface*,double,double,double,quint64)),
+            this, SLOT(attitudeChanged(UASInterface*,double,double,double,quint64)));
+    uas->enableExtra1Transmission(10);
+}
+
+void MainWindow::attitudeChanged(UASInterface *uas, double roll, double pitch, double yaw, quint64 time)
+{
+    m_settings->setRoll(roll * 180/3.14);
+    m_settings->setYaw(yaw * 180/3.14);
+    m_settings->setPitch(pitch * 180/3.14);
+//    qDebug() << pitch;
+}
+
+void Settings::attitudeUpdate()
+{
+    emit PitchChanged("Pitch", pitch);
+
+    emit YawChanged("Yaw",yaw);
+    emit RollChanged("Roll",roll);
 }

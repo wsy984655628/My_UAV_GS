@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <uasquickview.h>
 #include <uascompass.h>
+#include "uasmeters.h"
 
 namespace Ui {
 class UASTabbedInfoView;
@@ -20,7 +21,11 @@ public:
 private:
     Ui::UASTabbedInfoView *ui;
     UASQuickView *quickView;
-    UASCompass *compass;
+    UASMeters *meters;
+public slots:
+    void receivevalueChanged(const QString name, const float variant);
+signals:
+    void valueChanged(QString name,float variant);
 };
 
 #endif // UASTABBEDINFOVIEW_H

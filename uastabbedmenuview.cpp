@@ -1,5 +1,6 @@
 #include "uastabbedmenuview.h"
 #include "ui_uastabbedmenuview.h"
+#include <QDebug>
 
 
 UASTabbedMenuView::UASTabbedMenuView(QWidget *parent) :
@@ -18,9 +19,16 @@ UASTabbedMenuView::UASTabbedMenuView(QWidget *parent) :
     ui->tabWidget->addTab(contral,"Contral");
     ui->tabWidget->addTab(parameter,"Parameter Edit");
     ui->tabWidget->addTab(simu,"Simulation");
+//    connect(this,SIGNAL(valueChanged(QString,float)),infoview,SLOT(receivevalueChanged(QString,float)));
 }
 
 UASTabbedMenuView::~UASTabbedMenuView()
 {
     delete ui;
+}
+
+void UASTabbedMenuView::ReceivevalueChanged(const QString name, const float variant)
+{
+    emit valueChanged(name,variant);
+//    qDebug()<< name << variant;
 }

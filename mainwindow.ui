@@ -31,10 +31,10 @@
     <item>
      <widget class="QScrollBar" name="yawScrollBar">
       <property name="minimum">
-       <number>-180</number>
+       <number>0</number>
       </property>
       <property name="maximum">
-       <number>180</number>
+       <number>360</number>
       </property>
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
@@ -74,6 +74,26 @@
      <height>23</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuCalls">
+    <property name="geometry">
+     <rect>
+      <x>339</x>
+      <y>104</y>
+      <width>188</width>
+      <height>100</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="title">
+     <string>连接</string>
+    </property>
+    <addaction name="actionConfigure_SerialPort"/>
+   </widget>
+   <addaction name="menuCalls"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -84,6 +104,16 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionConfigure_SerialPort">
+   <property name="text">
+    <string>Configure Serial Port</string>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>

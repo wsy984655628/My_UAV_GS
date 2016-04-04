@@ -25,6 +25,11 @@ private:
     UASContral *contral;
     UASParameter *parameter;
     UASSimulation *simu;
+
+public slots:
+     void ReceivevalueChanged(const QString name, const float variant);
+signals:
+     void valueChanged(QString name, float variant);
 };
 
 #endif // UASTABBEDMENUVIEW_H

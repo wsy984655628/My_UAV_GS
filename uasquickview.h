@@ -8,6 +8,7 @@
 
 #include <uasinterface.h>
 #include <quickviewitem.h>
+#include <mainwindow.h>
 
 namespace Ui {
 class UASQuickView;
@@ -37,22 +38,19 @@ private:
     int m_currentColumn;
     QMap<QString,int> m_PropertyToLayoutIndexMap;
 
+    UASInterface * uas;
+
 protected:
     Ui::UASQuickView *ui;
-//    void resizeEvent(QResizeEvent *evt);
 
 public slots:
-    void valueChanged(const QString& name, const QVariant& variant);
-//    void actionTriggered(bool checked);
-//    void actionTriggered();
+    void valueChanged(const QString name, const float variant);
     void updateTimerTick();
-//    void selectDialogClosed();
     void valueEnabled(QString value);
-//    void valueDisabled(QString value);
-//    void columnActionTriggered();
 
-private slots:
-//    void _activeVehicleChanged(Vehicle* vehicle);
+    void addUAS(UASInterface* uas);
+    void attitudeChanged(UASInterface* uas, double roll, double pitch, double yaw, quint64 time);
+
 };
 
 #endif // UASQUICKVIEW_H

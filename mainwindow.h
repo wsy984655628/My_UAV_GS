@@ -2,6 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "SerialCommunication/serialsettingdialog.h"
+#include "comm/linkmanager.h"
+#include "uas/uasmanager.h"
 
 class Settings: public QObject
 {
@@ -20,9 +23,13 @@ public:
     void setRoll(float Roll);
     void setYaw(float Yaw);
 signals:
-    void PitchChanged(void);
-    void RollChanged(void);
-    void YawChanged(void);
+    void PitchChanged(QString name,float variant);
+    void RollChanged(QString name,float variant);
+    void YawChanged(QString name,float variant);
+
+public slots:
+    void attitudeUpdate();
+
 protected:
     float pitch;
     float roll;
@@ -40,6 +47,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    Settings *m_settings;
 
 
 private slots:
@@ -49,9 +57,15 @@ private slots:
 
     void on_pitchScrollBar_sliderMoved(int position);
 
+    void systemCreated(UASInterface* uas);
+    void attitudeChanged(UASInterface* uas, double roll, double pitch, double yaw, quint64 time);
+
 private:
     Ui::MainWindow *ui;
-    Settings *m_settings;
+    SerialSettingDialog *serial;
+    QTimer* myTimer;
+
+
 };
 
 #endif // MAINWINDOW_H

@@ -8,14 +8,14 @@ Entity
     Camera
     {
         id: camera
-        position: Qt.vector3d( 0.0, 20.0, 100.0 )
+        position: Qt.vector3d( 0.0, 0.0, 300.0 )
         projectionType: CameraLens.PerspectiveProjection
         fieldOfView: 90
-        aspectRatio: 16.0 / 9.0
+        aspectRatio: 16.0 / 13.0
         nearPlane : 0.1
         farPlane : 1000.0
         upVector: Qt.vector3d( 0.0, 1.0, 0.0 )
-        viewCenter: Qt.vector3d( 0.0, 20.0, 0.0 )
+        viewCenter: Qt.vector3d( 0.0, -150.0, 0.0 )
     }
 
     components: FrameGraph
@@ -32,7 +32,9 @@ Entity
         Mesh
         {
             id: chestMesh
-            source: "qrc:/assets/Chest.obj"
+//            source: "qrc:/assets/uassim.obj"
+//            source: "qrc:/assets/Chest.obj"
+            source: "qrc:/assets/handao.obj"
         }
 
         Transform{
@@ -46,12 +48,18 @@ Entity
             Rotate{
                 axis: Qt.vector3d(0,0,1)
 //                angle:0
-                angle:_settings.Roll
+                angle: - _settings.Roll
             }
             Rotate{
                 axis:Qt.vector3d(0,1,0)
                 angle:_settings.Yaw
 //                angle:0
+            }
+
+            Translate{
+                dy : -150
+                dz : -100
+
             }
         }
 
@@ -59,6 +67,6 @@ Entity
     }
     Configuration
     {
-    //    controlledCamera: camera
+        controlledCamera: camera
     }
 }

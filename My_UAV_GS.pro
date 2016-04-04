@@ -6,8 +6,14 @@
 
 QT       += core gui
 QT       += webkitwidgets
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets serialport
 QT += 3dcore 3drenderer 3dinput 3dquick qml quick
+
+DEFINES += QT_DLL QWT_DLL
+LIBS += -L"C:\Qt\Qt5.5.1\5.5\mingw492_32\lib" -lqwtd
+LIBS += -L"C:\Qt\Qt5.5.1\5.5\mingw492_32\lib" -lqwt
+INCLUDEPATH += C:\Qt\Qt5.5.1\5.5\mingw492_32\include\Qwt
+
 
 TARGET = My_UAV_GS
 TEMPLATE = app
@@ -23,7 +29,15 @@ SOURCES += main.cpp\
     uastabbedmenuview.cpp \
     uascontral.cpp \
     uasparameter.cpp \
-    uassimulation.cpp
+    uassimulation.cpp \
+    uasmeters.cpp \
+    SerialCommunication/serialconsole.cpp \
+    SerialCommunication/serialsettingdialog.cpp \
+    my_gs.cpp \
+    comm/linkmanager.cpp \
+    comm/mavlinkprotocol.cpp \
+    uas/uas.cpp \
+    uas/uasmanager.cpp
 
 HEADERS  += mainwindow.h \
     uasinterface.h \
@@ -35,7 +49,18 @@ HEADERS  += mainwindow.h \
     uastabbedmenuview.h \
     uascontral.h \
     uasparameter.h \
-    uassimulation.h
+    uassimulation.h \
+    uasmeters.h \
+    SerialCommunication/serialconsole.h \
+    SerialCommunication/serialsettingdialog.h \
+    my_gs.h \
+    comm/gsmavlink.h \
+    comm/linkmanager.h \
+    comm/mavlinkdecoder.h \
+    comm/mavlinkprotocol.h \
+    uas/uas.h \
+    uas/uasinterface.h \
+    uas/uasmanager.h
 
 FORMS    += mainwindow.ui \
     uasquickview.ui \
@@ -44,7 +69,9 @@ FORMS    += mainwindow.ui \
     uastabbedmenuview.ui \
     uascontral.ui \
     uasparameter.ui \
-    uassimulation.ui
+    uassimulation.ui \
+    uasmeters.ui \
+    SerialCommunication/serialsettingdialog.ui
 
 RESOURCES += \
     qml.qrc \

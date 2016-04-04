@@ -4,6 +4,7 @@
 #include "mainwindow.h"
 
 #include <QGroupBox>
+#include <QDebug>
 
 UASQuickView::UASQuickView(QWidget *parent) :
     QWidget(parent),
@@ -33,9 +34,11 @@ UASQuickView::UASQuickView(QWidget *parent) :
         valueEnabled("groundSpeed");
     }
     updateTimer = new QTimer(this);
-
     connect(updateTimer, &QTimer::timeout, this, &UASQuickView::updateTimerTick);
-    updateTimer->start(1000);
+    updateTimer->start(100);
+
+    connect(UASManager::instance(), SIGNAL(UASCreated(UASInterface*)), this, SLOT(addUAS(UASInterface*)));
+
 }
 
 UASQuickView::~UASQuickView()
@@ -120,9 +123,23 @@ void UASQuickView::updateTimerTick()
     }
 }
 
-void UASQuickView::valueChanged(const QString &name, const QVariant &variant)
+void UASQuickView::valueChanged(const QString name, const float variant)
 {
-    double value = variant.toDouble();
-    uasPropertyValueMap[name] = value;
+    uasPropertyValueMap[name] = variant;
+//    qDebug() << name << variant;
+}
 
+void UASQuickView::addUAS(UASInterface *uas)
+{
+    if(uas)
+    {
+        this->uas = uas;
+        connect(uas, SIGNAL(attitudeChanged(UASInterface*,double,double,double,quint64)),
+                this, SLOT(attitudeChanged(UASInterface*,double,double,double,quint64)));
+    }
+}
+
+void UASQuickView::attitudeChanged(UASInterface *uas, double roll, double pitch, double yaw, quint64 time)
+{
+    uasPropertyValueMap["Pitch"] = pitch * 180 / 3.14;
 }
