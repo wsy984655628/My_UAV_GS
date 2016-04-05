@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>557</width>
+    <height>441</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -77,17 +77,17 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>400</width>
+     <width>557</width>
      <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuCalls">
     <property name="geometry">
      <rect>
-      <x>339</x>
+      <x>338</x>
       <y>104</y>
       <width>188</width>
-      <height>77</height>
+      <height>101</height>
      </rect>
     </property>
     <property name="font">
@@ -96,11 +96,26 @@
      </font>
     </property>
     <property name="title">
-     <string>连接</string>
+     <string>File</string>
     </property>
     <addaction name="actionConfigure_SerialPort"/>
+    <addaction name="actionEXIT"/>
+   </widget>
+   <widget class="QMenu" name="menuView">
+    <property name="title">
+     <string>View</string>
+    </property>
+    <addaction name="actionFLY"/>
+    <addaction name="actionSimulation"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
    </widget>
    <addaction name="menuCalls"/>
+   <addaction name="menuView"/>
+   <addaction name="menuHelp"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -119,6 +134,21 @@
     <font>
      <pointsize>10</pointsize>
     </font>
+   </property>
+  </action>
+  <action name="actionEXIT">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionFLY">
+   <property name="text">
+    <string>Fly</string>
+   </property>
+  </action>
+  <action name="actionSimulation">
+   <property name="text">
+    <string>Simulation</string>
    </property>
   </action>
  </widget>

@@ -74,6 +74,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
     SerialSettingDialog::instance();
     connect(ui->actionConfigure_SerialPort, SIGNAL(triggered(bool)), SerialSettingDialog::instance(), SLOT(show()));
+    connect(ui->actionEXIT,SIGNAL(triggered(bool)),this,SLOT(close()));
+
+//    QList<QAction*> actions;
+//    actions << ui->actionFLY;
+//    actions << ui->actionSimulation;
+//    QToolBar * toolBar = new QToolBar(this);
+//    this->addToolBar(toolBar);
+//    toolBar->setper
 
     using namespace Qt3D;
     using namespace Qt3D::Quick;

@@ -192,8 +192,8 @@ void SerialSettingDialog::initConnections()
     connect(serial, SIGNAL(error(QSerialPort::SerialPortError)), this,
             SLOT(handleError(QSerialPort::SerialPortError)));
     connect(serial, SIGNAL(readyRead()), this, SLOT(readData()));
-    connect(ui->SendData_Button, SIGNAL(clicked(bool)), this,
-            SLOT(SendData()));
+//    connect(ui->SendData_Button, SIGNAL(clicked(bool)), this,
+//            SLOT(SendData()));
     connect(ui->Connect_Button, SIGNAL(clicked(bool)), this,
             SLOT(openSerial()));
     connect(ui->DisConnect_Button, SIGNAL(clicked(bool)), this,
