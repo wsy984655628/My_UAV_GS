@@ -7,6 +7,7 @@
 #include <QDebug>
 
 #include "comm/linkmanager.h"
+#include "mainwindow.h"
 
 static const char blankString[] = QT_TRANSLATE_NOOP("SerialSettingDialog","N/A");
 
@@ -221,9 +222,15 @@ void SerialSettingDialog::openSerial()
         qDebug() << tr("Connected to %1 : %2, %3, %4, %5, %6")
                     .arg(currentSettings.name).arg(currentSettings.stringBaudRate).arg(currentSettings.stringDataBits)
                     .arg(currentSettings.stringParity).arg(currentSettings.stringStopBits).arg(currentSettings.stringFlowControl);
+
+        MainWindow::instance()->status->setText(tr("Connected Success to %1 : %2, %3, %4, %5, %6")
+                                                .arg(currentSettings.name).arg(currentSettings.stringBaudRate).arg(currentSettings.stringDataBits)
+                                                .arg(currentSettings.stringParity).arg(currentSettings.stringStopBits).arg(currentSettings.stringFlowControl));
+
     }
     else{
         ui->ConnectState_label->setText("ConnectState: Connect Failed");
+        MainWindow::instance()->status->setText("Connect Failed");
     }
 }
 
@@ -233,6 +240,7 @@ void SerialSettingDialog::closeSerial()
     {
         serial->close();
         ui->ConnectState_label->setText("ConnectState: DisConnect");
+        MainWindow::instance()->status->setText("DisConnected");
     }
 }
 

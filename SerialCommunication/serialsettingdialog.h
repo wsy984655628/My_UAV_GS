@@ -42,12 +42,6 @@ private slots:
     void apply();
     void checkCustomBaudRatePolicy(int idx);
     void checkCustomDevicePathPolicy(int idx);
-
-    void openSerial();
-
-    void closeSerial();
-
-
 // handle serial port
     void writeData(const QByteArray &data);
     void readData();
@@ -55,7 +49,9 @@ private slots:
 
     void SendData(const char *data, qint64 len);
 
-
+public slots:
+    void openSerial();
+    void closeSerial();
 
 signals:
     bytesReceived(QByteArray data);

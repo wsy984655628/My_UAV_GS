@@ -3,5 +3,8 @@
         <file>FlightMap/crossHair.svg</file>
         <file>FlightMap/rollDialWhite.svg</file>
         <file>FlightMap/rollPointerWhite.svg</file>
+        <file>FlightMap/Fly.png</file>
+        <file>FlightMap/Setting.png</file>
+        <file>FlightMap/Simulation.png</file>
     </qresource>
 </RCC>

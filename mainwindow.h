@@ -5,6 +5,7 @@
 #include "SerialCommunication/serialsettingdialog.h"
 #include "comm/linkmanager.h"
 #include "uas/uasmanager.h"
+#include "QLabel"
 
 class Settings: public QObject
 {
@@ -46,8 +47,11 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = 0);
+    static MainWindow* instance();
     ~MainWindow();
     Settings *m_settings;
+
+    QLabel* status;
 
 
 private slots:
@@ -60,7 +64,11 @@ private slots:
     void systemCreated(UASInterface* uas);
     void attitudeChanged(UASInterface* uas, double roll, double pitch, double yaw, quint64 time);
 
+    void SerialConnect(bool is_connected);
+
 private:
+    void ToolBarInit();
+
     Ui::MainWindow *ui;
     SerialSettingDialog *serial;
     QTimer* myTimer;

@@ -64,24 +64,31 @@ void Settings::setYaw(float Yaw)
 //    emit YawChanged("Yaw",yaw);
 }
 
+MainWindow* MainWindow::instance()
+{
+    static MainWindow* _instance = 0;
+    if(_instance == 0)
+    {
+        _instance = new MainWindow();
+    }
+    return _instance;
+}
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
 
     ui->setupUi(this);
-    this->resize(1000,700);
+    this->resize(1000,750);
 
+    status = new QLabel(this);
+    status->setFrameStyle(QFrame::Box | QFrame::Sunken);
+    ui->statusBar->addWidget(status);
+
+//    MainWindow::instance();
     SerialSettingDialog::instance();
-    connect(ui->actionConfigure_SerialPort, SIGNAL(triggered(bool)), SerialSettingDialog::instance(), SLOT(show()));
-    connect(ui->actionEXIT,SIGNAL(triggered(bool)),this,SLOT(close()));
-
-//    QList<QAction*> actions;
-//    actions << ui->actionFLY;
-//    actions << ui->actionSimulation;
-//    QToolBar * toolBar = new QToolBar(this);
-//    this->addToolBar(toolBar);
-//    toolBar->setper
+    ToolBarInit();
 
     using namespace Qt3D;
     using namespace Qt3D::Quick;
@@ -181,4 +188,31 @@ void Settings::attitudeUpdate()
 
     emit YawChanged("Yaw",yaw);
     emit RollChanged("Roll",roll);
+}
+
+void MainWindow::ToolBarInit()
+{
+    QWidget *spacer = new QWidget(this);
+    spacer->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
+    ui->toolBar_2->addWidget(spacer);
+    ui->toolBar_2->addAction(ui->actionConfigure_SerialPort);
+    ui->toolBar_2->addAction(ui->actionConnect);
+
+    connect(ui->actionConnect, SIGNAL(toggled(bool)),this, SLOT(SerialConnect(bool)));
+    connect(ui->actionConfigure_SerialPort, SIGNAL(triggered(bool)), SerialSettingDialog::instance(), SLOT(show()));
+    connect(ui->actionEXIT,SIGNAL(triggered(bool)),this,SLOT(close()));
+}
+
+void MainWindow::SerialConnect(bool is_connected)
+{
+    if(is_connected)
+    {
+        SerialSettingDialog::instance()->openSerial();
+        ui->actionConnect->setText("Disconnect");
+    }
+    else
+    {
+        SerialSettingDialog::instance()->closeSerial();
+        ui->actionConnect->setText("Connect");
+    }
 }
