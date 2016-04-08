@@ -23,8 +23,8 @@ UASQuickView::UASQuickView(QWidget *parent) :
         valueEnabled("Roll");
         valueEnabled("Pitch");
         valueEnabled("Yaw");
-        valueEnabled("Height");
-        valueEnabled("distToWaypoint");
+        valueEnabled("height");
+        valueEnabled("Valtage");
         valueEnabled("groundSpeed");
     }
     updateTimer = new QTimer(this);
@@ -32,7 +32,6 @@ UASQuickView::UASQuickView(QWidget *parent) :
     updateTimer->start(100);
 
     connect(UASManager::instance(), SIGNAL(UASCreated(UASInterface*)), this, SLOT(addUAS(UASInterface*)));
-
 }
 
 UASQuickView::~UASQuickView()
@@ -130,10 +129,33 @@ void UASQuickView::addUAS(UASInterface *uas)
         this->uas = uas;
         connect(uas, SIGNAL(attitudeChanged(UASInterface*,double,double,double,quint64)),
                 this, SLOT(attitudeChanged(UASInterface*,double,double,double,quint64)));
+        connect(uas, SIGNAL(speedChanged(UASInterface*,double,quint64)),
+                this, SLOT(speedChanged(UASInterface*,double,quint64)));
+        connect(uas, SIGNAL(altitudeChanged(UASInterface*,double,double,quint64)),
+                this, SLOT(altitudeChanged(UASInterface*,double,double,quint64)));
+        connect(uas, SIGNAL(batteryChanged(UASInterface*,double,quint64)),
+                this, SLOT(batteryChanged(UASInterface*,double,quint64)));
     }
 }
 
 void UASQuickView::attitudeChanged(UASInterface *uas, double roll, double pitch, double yaw, quint64 time)
 {
     uasPropertyValueMap["Pitch"] = pitch * 180 / 3.14;
+    uasPropertyValueMap["Roll"] = roll * 180 / 3.14;
+    uasPropertyValueMap["Yaw"] = yaw * 180 / 3.14;
+}
+
+void UASQuickView::speedChanged(UASInterface *uas, double groundSpeed, quint64 time)
+{
+    uasPropertyValueMap["groundSpeed"] = groundSpeed;
+}
+
+void UASQuickView::altitudeChanged(UASInterface* uas, double altitudeAMSL, double altitudeRelative, quint64 time)
+{
+    uasPropertyValueMap["height"] = altitudeAMSL;
+}
+
+void UASQuickView::batteryChanged(UASInterface *uas, double voltage, quint64 usec)
+{
+    uasPropertyValueMap["Valtage"] = voltage;
 }

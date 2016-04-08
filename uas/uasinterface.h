@@ -141,7 +141,8 @@ signals:
      * @param percent remaining capacity in percent
      * @param seconds estimated remaining flight time in seconds
      */
-    void batteryChanged(UASInterface* uas, double voltage, double current, double percent, int seconds);
+//    void batteryChanged(UASInterface* uas, double voltage, double current, double percent, int seconds);
+    void batteryChanged(UASInterface* uas, double voltage, quint64 usec);
     void statusChanged(UASInterface* uas, QString status);
     void actuatorChanged(UASInterface*, int actId, double value);
     void thrustChanged(UASInterface*, double thrust);
@@ -151,6 +152,7 @@ signals:
     void attitudeRotationRatesChanged(int uas, double rollrate, double pitchrate, double yawrate, quint64 usec);
     void attitudeThrustSetPointChanged(UASInterface*, double rollDesired, double pitchDesired, double yawDesired, double thrustDesired, quint64 usec);
 
+
     /** @brief The MAV set a new setpoint in the local (not body) NED X, Y, Z frame */
     void positionSetPointsChanged(int uasid, float xDesired, float yDesired, float zDesired, float yawDesired, quint64 usec);
     /** @brief A user (or an autonomous mission or obstacle avoidance planner) requested to set a new setpoint */
@@ -158,12 +160,12 @@ signals:
     void localPositionChanged(UASInterface*, double x, double y, double z, quint64 usec);
     void localPositionChanged(UASInterface*, int component, double x, double y, double z, quint64 usec);
     void globalPositionChanged(UASInterface*, double lat, double lon, double alt, quint64 usec);
-    void altitudeChanged(UASInterface*, double altitudeAMSL, double altitudeRelative, double climbRate, quint64 usec);
+    void altitudeChanged(UASInterface*, double altitudeAMSL, double altitudeRelative, quint64 usec);
     /** @brief Update the status of one satellite used for localization */
     void gpsSatelliteStatusChanged(int uasid, int satid, float azimuth, float direction, float snr, bool used);
 
     // The horizontal speed (a scalar)
-    void speedChanged(UASInterface* uas, double groundSpeed, double airSpeed, quint64 usec);
+    void speedChanged(UASInterface* uas, double groundSpeed, quint64 usec);
     // Consider adding a MAV_FRAME parameter to this; could help specifying what the 3 scalars are.
     void velocityChanged_NED(UASInterface*, double vx, double vy, double vz, quint64 usec);
 

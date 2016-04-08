@@ -50,7 +50,9 @@ public slots:
 
     void addUAS(UASInterface* uas);
     void attitudeChanged(UASInterface* uas, double roll, double pitch, double yaw, quint64 time);
-
+    void speedChanged(UASInterface* uas, double groundSpeed, quint64 time);
+    void altitudeChanged(UASInterface* uas, double altitudeAMSL, double altitudeRelative, quint64 time);
+    void batteryChanged(UASInterface* uas, double voltage, quint64 usec);
 };
 
 #endif // UASQUICKVIEW_H

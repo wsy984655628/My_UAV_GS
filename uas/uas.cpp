@@ -35,9 +35,15 @@ UAS::UAS(MAVLINKProtocol* protocol, int id) : UASInterface(),
    attitudeStamped(false),
    lastAttitude(0),
 
+   batteryVoltage(12.6),
+
    roll(0.0),
    pitch(0.0),
    yaw(0.0),
+   groundSpeed(0.0),
+   throttle(0),
+   altitudeAMSL(0.0),
+   altitudeRelative(0.0),
 
    // The protected members.
    lastNonNullTime(0)
@@ -82,6 +88,7 @@ void UAS::receiveMessage( mavlink_message_t message)
        case MAVLINK_MSG_ID_HEARTBEAT:
        {
            emit heartbeat(this);
+//           qDebug() << "heartbeat";
            mavlink_heartbeat_t state;
            mavlink_msg_heartbeat_decode(&message, &state);
 
@@ -92,7 +99,22 @@ void UAS::receiveMessage( mavlink_message_t message)
            emit valueChanged(uasId, name.arg("base_mode"), "bits", state.base_mode, time);
            emit valueChanged(uasId, name.arg("custom_mode"), "bits", state.custom_mode, time);
            emit valueChanged(uasId, name.arg("system_status"), "-", state.system_status, time);
-           } break;
+           }
+           break;
+
+       case MAVLINK_MSG_ID_SYS_STATUS:
+       {
+           qDebug() << "sys status receive";
+           mavlink_sys_status_t state;
+           mavlink_msg_sys_status_decode(&message, &state);
+           quint64 time = getUnixTime();
+
+           setBatteryVoltage(state.voltage_battery);
+           emit batteryChanged(this,getBatteryVoltage(), time);
+           qDebug() << getBatteryVoltage();
+
+       }
+           break;
 
        case MAVLINK_MSG_ID_ATTITUDE:
        {
@@ -115,6 +137,27 @@ void UAS::receiveMessage( mavlink_message_t message)
 //           qDebug() << getRoll();
        }
            break;
+
+       case MAVLINK_MSG_ID_ATTITUDE_QUATERNION:
+       {
+           qDebug() << "msg receive";
+       }
+           break;
+
+       case MAVLINK_MSG_ID_VFR_HUD:
+       {
+           mavlink_vfr_hud_t hud;
+           quint64 time = getUnixTime();
+
+           // Display updated values
+           setThrottle(hud.throttle);
+           setGroundSpeed(hud.groundspeed);
+           setAltitudeAMSL(hud.alt);
+
+           emit thrustChanged(this, getThrottle()/100.0);
+           emit speedChanged(this, getGroundSpeed(), time);
+           emit altitudeChanged(this,getAltitudeAMSL(), getAltitudeRelative(), time);
+       }break;
 
        default:
        {

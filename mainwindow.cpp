@@ -80,13 +80,12 @@ MainWindow::MainWindow(QWidget *parent) :
 {
 
     ui->setupUi(this);
-    this->resize(1000,750);
+    this->resize(1000,850);
 
     status = new QLabel(this);
     status->setFrameStyle(QFrame::Box | QFrame::Sunken);
     ui->statusBar->addWidget(status);
 
-//    MainWindow::instance();
     SerialSettingDialog::instance();
     ToolBarInit();
 

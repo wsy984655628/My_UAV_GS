@@ -22,6 +22,11 @@ public:
     Q_PROPERTY(double roll READ getRoll WRITE setRoll NOTIFY rollChanged)
     Q_PROPERTY(double pitch READ getPitch WRITE setPitch NOTIFY pitchChanged)
     Q_PROPERTY(double yaw READ getYaw WRITE setYaw NOTIFY yawChanged)
+    Q_PROPERTY(double groundSpeed READ getGroundSpeed WRITE setGroundSpeed NOTIFY groundSpeedChanged)
+    Q_PROPERTY(uint16_t throttle READ getThrottle WRITE setThrottle NOTIFY throttleChanged)
+    Q_PROPERTY(double altitudeAMSL READ getAltitudeAMSL WRITE setAltitudeAMSL NOTIFY altitudeAMSLChanged)
+    Q_PROPERTY(double altitudeRelative READ getAltitudeRelative WRITE setAltitudeRelative NOTIFY altitudeRelativeChanged)
+    Q_PROPERTY(double batteryVoltage READ getBatteryVoltage WRITE setBatteryVoltage NOTIFY batteryVoltageChanged)
 
     void setRoll(double val)
     {
@@ -56,6 +61,55 @@ public:
         return yaw;
     }
 
+    double getGroundSpeed() const
+    {
+        return groundSpeed;
+    }
+
+    void setGroundSpeed(double val)
+    {
+        groundSpeed = val;
+    }
+
+    uint16_t getThrottle()
+    {
+        return throttle;
+    }
+
+    void setThrottle(uint16_t val)
+    {
+        throttle = val;
+    }
+
+    double getAltitudeAMSL()
+    {
+        return altitudeAMSL;
+    }
+
+    void setAltitudeAMSL(double val)
+    {
+        altitudeAMSL = val;
+    }
+
+    double getAltitudeRelative()
+    {
+        return altitudeRelative;
+    }
+
+    void setAltitudeRelative(double val)
+    {
+        altitudeRelative = val;
+    }
+
+    double getBatteryVoltage()
+    {
+        return batteryVoltage;
+    }
+
+    void setBatteryVoltage(double val)
+    {
+        batteryVoltage = val;
+    }
 
 protected:
     /// LINK ID AND STATUS
@@ -87,6 +141,12 @@ protected:
     double roll;
     double pitch;
     double yaw;
+    double groundSpeed;
+    double altitudeAMSL;
+    double altitudeRelative;
+    double batteryVoltage;
+    uint16_t throttle;
+
 
 public slots:
     void valueChangedRec(const int uasId, const QString& name, const QString& unit, const QVariant& value, const quint64 msec);
@@ -107,6 +167,12 @@ signals:
     void rollChanged(double val,QString name);
     void pitchChanged(double val,QString name);
     void yawChanged(double val,QString name);
+    void groundSpeedChanged(double val, QString name);
+    void throttleChanged(uint16_t val, QString name);
+    void altitudeAMSLChanged(double val, QString name);
+    void altitudeRelativeChanged(double val, QString name);
+    void batteryVoltageChanged(double val, QString name);
+
 protected:
     /** @brief Get the UNIX timestamp in milliseconds, enter microseconds */
     quint64 getUnixTime(quint64 time=0);
